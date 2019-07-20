@@ -16,14 +16,19 @@ Gradient : Measure of change in brightness over adjacent pixels
 
 edge : rapid changes in brightness
 
-step 1 : gray scale
-    3 channels to 1 channel(one intensity)
-    = fast processing
+    step 1 : gray scale
+        3 channels to 1 channel(one intensity)
+        = fast processing
 '''
 gray = cv2.cvtColor(lane_image, cv2.COLOR_RGB2GRAY)
 
 '''
 #3 : Finding Lane Lines(Gaussian Blur)
+    step 2. Reduce Noise
+'''
+blur = cv2.GaussianBlur(gray, (5, 5), 0)
+
+'''
 
 '''
 cv2.imshow('result', gray)
