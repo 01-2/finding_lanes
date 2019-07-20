@@ -5,10 +5,10 @@ import numpy as np
 def canny(image):
     '''
     #2 : Grayscale Conversion
-    Edge Detection : identifying sharp changes in intensity in adjacent pixels
-    Gradient : Measure of change in brightness over adjacent pixels
+        Edge Detection : identifying sharp changes in intensity in adjacent pixels
+        Gradient : Measure of change in brightness over adjacent pixels
 
-    edge : rapid changes in brightness
+        edge : rapid changes in brightness
 
         step 1 : gray scale
             3 channels to 1 channel(one intensity)
@@ -53,7 +53,7 @@ def region_of_interest(image):
 
 '''
 #1 : Installation
-imread, imshow
+    imread, imshow
 '''
 
 image = cv2.imread('test_image.jpg')
@@ -62,6 +62,12 @@ canny = canny(lane_image)
 cropped_image = region_of_interest(canny)
 #plt.imshow(canny)
 #plt.show()
+
+'''
+#7 Hough Transform
+    finding possible line by hough space 
+    can determine ax + b
+'''
 
 cv2.imshow("result", cropped_image)
 cv2.waitKey(0)
