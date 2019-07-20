@@ -4,7 +4,7 @@ import numpy as np
 
 def canny(image):
     '''
-    #2 : Findding Lane Lines(Grayscale Conversion)
+    #2 : Grayscale Conversion
     Edge Detection : identifying sharp changes in intensity in adjacent pixels
     Gradient : Measure of change in brightness over adjacent pixels
 
@@ -17,13 +17,13 @@ def canny(image):
     gray = cv2.cvtColor(lane_image, cv2.COLOR_RGB2GRAY)
 
     '''
-    #3 : Finding Lane Lines(Gaussian Blur)
+    #3 : Gaussian Blur
         step 2. Reduce Noise
     '''
     blur = cv2.GaussianBlur(gray, (5, 5), 0)
 
     '''
-    #4 : Finding Lane Lines(Canny)
+    #4 : Canny
         derivate(f(x,y)) -> measure adjacent changes in intensity in all directions, x and y
         cv2.Canny(image, low_threshold, high_threshold)
     '''
@@ -33,7 +33,7 @@ def canny(image):
 
 
 '''
-#5 Finding Lane Lines(Region of Interest)
+#5 Region of Interest
     using pyplot, setting region of interest
 '''
 def region_of_interest(image):
@@ -43,7 +43,13 @@ def region_of_interest(image):
     ])
     mask = np.zeros_like(image)
     cv2.fillPoly(mask, polygons, 255)
-    return mask
+
+    '''
+    #6 Bitwise_and
+        masking region of interest at lane image
+    '''
+    masked_image = cv2.bitwise_and(image, mask)
+    return masked_image
 
 '''
 #1 : Installation
@@ -53,9 +59,9 @@ imread, imshow
 image = cv2.imread('test_image.jpg')
 lane_image = np.copy(image)
 canny = canny(lane_image)
-
+cropped_image = region_of_interest(canny)
 #plt.imshow(canny)
 #plt.show()
 
-cv2.imshow("result", region_of_interest(canny))
+cv2.imshow("result", cropped_image)
 cv2.waitKey(0)
